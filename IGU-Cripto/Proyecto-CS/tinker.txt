@@ -1,0 +1,53 @@
+from cliente import Cliente
+from tkinter import *
+from tkinter.filedialog import askopenfilename
+
+c = Cliente()
+
+#Ventana
+ventana = Tk()
+ventana.geometry("600x500")
+ventana.title("Chat con cifrado de Mensajes y archivos de texto")
+
+
+#Etiquetas
+intro = Label(ventana, text="Mensajes :", width=18, height=3)
+intro.grid(row=1 , column=0)
+
+url = Button(ventana, text="Ingresa la ruta del archivo :", width=20, height=2)
+url.grid(row=3 , column=0)
+
+#file = askopenfilename()
+textrut = Label(ventana, text="file", width=60, height=3)
+textrut.grid(row=3, column=1)
+
+intro = Label(ventana, text="Introduce el mensaje :", width=18, height=3)
+intro.grid(row=4 , column=0)
+
+#Caja de texto
+textbox = Text(ventana, width=40)
+textbox.grid(row=1 , column=1)
+
+msg = Entry(ventana, width=60)
+msg.grid(row=4, column=1)
+
+#Botones 
+botmsg = Button(ventana, text="Enviar mensaje", width=15, height=2)
+botmsg.grid(row=5 , column=0)
+
+bottxt = Button(ventana, text="Enviar archivo", width=15, height=2)
+bottxt.grid(row=5 , column=1)
+
+botverfile = Button(ventana, text="Ver archivos", width=15, height=2)
+botverfile.grid(row=6 , column=1)
+
+#Radiobutton
+radbott = Radiobutton(ventana, text="Algoritmo Cesar", value=1)
+radbott.grid(row=2 , column=0)
+
+radbott = Radiobutton(ventana, text="Algoritmo One Time Pad", value=2)
+radbott.grid(row=2 , column=1)
+
+
+ventana.mainloop()
+

@@ -1,0 +1,36 @@
+    def msgRecibido(self):
+		dig = ['']
+		while True:
+			try:
+				data = self.sock.recv(1024)
+				if data:
+					mens_rec = pickle.loads(data)
+					dig = mens_rec.split('|', maxsplit=1)
+					Nmen = dig[1]					
+					nm = hashlib.md5(Nmen.encode())
+					#print(nm.hexdigest())
+					if nm.hexdigest() == dig[0]:
+						print(time.strftime("%c") + "--" + Nmen +'\n')
+					else:
+						print("Error: Los mensajes no coinciden.")
+			except:
+				pass
+
+	def cesar(texto):
+		nmen = ''
+		for caracter in texto:
+			nmen += str(chr(ord(caracter)+3))
+		return nmen
+
+	def descesar(msgrec):
+		for caracter in msgrec:
+			nrecmen += str(chr(ord(caracter)-3))
+		return msgrec
+
+	def OneTimePad(texto):
+		nmen = onetimepad.encrypt(texto,'XLR8')
+		return nmen
+
+	def desOneTimePad(msgrec):
+		msg = onetimepad.decrypt(msgrec, 'XLR8')
+		return msg

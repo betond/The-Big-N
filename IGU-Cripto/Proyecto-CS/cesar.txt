@@ -1,0 +1,15 @@
+men = "Hola perro"
+nmen = ''
+
+def cifrar(men):
+    for caracter in men:
+    	nmen += str(chr(ord(caracter)+3))
+    
+
+def descifrar(nmen):
+	nrecmen = ''
+	recmen = nmen
+	for caracter in recmen:
+		nrecmen += str(chr(ord(caracter)-3))
+	print('Mensaje cifrado: '+ recmen)
+	print("Mensaje descifrado--" + nrecmen)

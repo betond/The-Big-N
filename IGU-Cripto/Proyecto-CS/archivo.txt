@@ -1,0 +1,21 @@
+def sendFile(url):
+    lineascif = []
+    archi1=open(url,"r")
+    archi2=open("rec.txt", "w")
+    lineas=archi1.readlines()
+    print(lineas)
+    for linea in lineas:
+        print(linea)
+
+
+    for linea in lineas:
+        nmen = ''
+        for caracter in linea:
+            nmen += str(chr(ord(caracter)+3))
+        lineascif.append(nmen)
+
+    for linea in lineascif:
+        archi2.write(linea)
+
+    archi1.close()
+    archi2.close()
