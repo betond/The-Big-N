@@ -25,26 +25,24 @@ def archivoReadBMP():       #Archivo de lectura
         botonRuta1['fg'] = 'white' # Si pasamos el Mouse queda blanco
         print("No se ha seleccionado ningún archivo.")
 
+#Algoritmo de Euclides con recursividad
 def maximo_comun_divisor(n, a):
     if a == 0:
         return n
     return maximo_comun_divisor(a, n % a)    
 
 def validarEntradas():
-    n = int(entradaN.get())
-    a = int(entradaAlfa.get()) 
-    b = int(entradaBeta.get())
     
-    mcd = maximo_comun_divisor(n, a)
+    mcd = maximo_comun_divisor(int(entradaN.get()), int(entradaAlfa.get()))
 
     msguser = StringVar()
 
     if mcd != 1:
-        msguser.set("Los valores seleccionados no son correctos ( mcd(n,alfa) != 1 ).")
+        msguser.set("Los valores seleccionados no son correctos ( mcd(n,alfa) != 1 ). \n" + "mcd(" + entradaN.get() + "," + entradaAlfa.get() + ") = " + str(mcd))
         botonValEnt['bg'] = 'red' # Al presionar queda azul
         botonValEnt['fg'] = 'white' # Si pasamos el Mouse queda blanco
     else:
-        msguser.set("Los valores seleccionados son correctos ( mcd(n,alfa) = 1 ).")
+        msguser.set("Los valores seleccionados son correctos ( mcd(n,alfa) = 1 ). \n" + "mcd(" + entradaN.get() + "," + entradaAlfa.get() + ") = " + str(mcd))
         botonValEnt['bg'] = 'green' # Al presionar queda azul
         botonValEnt['fg'] = 'white' # Si pasamos el Mouse queda blanco
 
@@ -60,7 +58,7 @@ def descifrar():     #Función de descifrado de mensajes
 #Ventana principal de la interfaz grafica
 igu = tk.Tk()
 igu.geometry("1100x800")
-igu.title("Práctica No.1 - Criptografía")
+igu.title("Práctica No.1 - Criptografía - MCD (Maximo Comun Divisor) - Algoritmo ")
 
 #Mensaje al usuario
 etiquetaCifrar = tk.Label(text="Especifique la ruta de la imagen '.bmp':")
