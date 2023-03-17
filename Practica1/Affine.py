@@ -49,11 +49,58 @@ def validarEntradas():
     mensajeUsuario.config(textvariable=msguser)
 
 def cifrar():       #Función de cifrado de mensajes
-    print("Cifrado")
+    
+    f1 = open(archivoEntrada, 'r')
+    textoPlano = f1.read()
+    f1.close()
+
+    a = int(entradaAlfa.get())
+    b = int(entradaBeta.get())
+    n = int(entradaN.get())
+
+    nmen = ""
+    for caracter in textoPlano:
+        nmen += str(chr(( a * ord(caracter) + b % n ))) ## Corregir rango y revisar alfabeto
+    
+    metsplit = str(archivoEntrada).split('/')
+    n = len(metsplit)
+    nomarchi = metsplit[n-1]
+    nomarchi = nomarchi.split('.')
+    salida = str(nomarchi[0]) + "-c.txt"
+    
+    f2 = open(salida, 'a')
+    f2.write(nmen)
+    f2.close()  
 
 
 def descifrar():     #Función de descifrado de mensajes
-    print("Descifrado")
+    f1 = open(archivoEntrada, 'r')
+    textoPlano = f1.read()
+    f1.close()
+
+    a = int(entradaAlfa.get())
+    b = int(entradaBeta.get())
+    n = int(entradaN.get())
+
+    invmulta = 3           ## pendiente de solución
+    invaddb = n - b
+
+    print(str(invmulta) + "<------------------------->" + str(invaddb))
+
+    nmen = ""
+    for caracter in textoPlano:
+        nmen += str(chr(( invmulta * ord(caracter) + invaddb % n ))) ## Corregir rango y revisar alfabeto
+    
+    metsplit = str(archivoEntrada).split('/')
+    n = len(metsplit)
+    nomarchi = metsplit[n-1]
+    print(nomarchi)
+    nomarchi = nomarchi.split('.')
+    salida = str(nomarchi[0]) + "-d.txt"
+    
+    f2 = open(salida, 'a')
+    f2.write(nmen)
+    f2.close() 
 
 #Ventana principal de la interfaz grafica
 igu = tk.Tk()
