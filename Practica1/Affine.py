@@ -7,7 +7,7 @@ except ImportError:
     raise ImportError("Se requieren los modulos Tkinter")
 #-------------------------------------------------------------------------------------------------------------------------------#
 archivoEntrada = ""
-
+alfabeto = {"a":0, "A":0, "b":1, "B":1,  "c":2, "C":2,  "d":3, "D":3, "e":4, "E":4  }
 
 def archivoReadBMP():       #Archivo de lectura 
     global archivoEntrada 
