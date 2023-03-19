@@ -7,7 +7,8 @@ except ImportError:
     raise ImportError("Se requieren los modulos Tkinter")
 #-------------------------------------------------------------------------------------------------------------------------------#
 archivoEntrada = ""
-alfabeto = {"a":0, "A":0, "b":1, "B":1,  "c":2, "C":2,  "d":3, "D":3, "e":4, "E":4  }
+#alfabeto = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5, "G":6, "H":7, "I":8, "J":9, "K":10, "L":11, "M":12, "N":13, "Ñ":14, "O":15, "P":16, "Q":17, "R":18, "S":19, "T":20, "U":21, "V":22, "W":23, "X":24, "Y":25, "Z":26}
+alfabeto = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5, "G":6, "H":7, "I":8, "J":9, "K":10, "L":11, "M":12, "N":13, "O":14, "P":15, "Q":16, "R":17, "S":18, "T":19, "U":20, "V":21, "W":22, "X":23, "Y":24, "Z":25}
 
 def archivoReadBMP():       #Archivo de lectura 
     global archivoEntrada 
@@ -51,8 +52,10 @@ def validarEntradas():
 def cifrar():       #Función de cifrado de mensajes
     
     f1 = open(archivoEntrada, 'r')
-    textoPlano = f1.read()
+    textoentrada = f1.read()
     f1.close()
+
+    textoPlano = textoentrada.upper()
 
     a = int(entradaAlfa.get())
     b = int(entradaBeta.get())
@@ -60,8 +63,9 @@ def cifrar():       #Función de cifrado de mensajes
 
     nmen = ""
     for caracter in textoPlano:
+##################################################################################################################################################
         nmen += str(chr(( a * ord(caracter) + b % n ))) ## Corregir rango y revisar alfabeto
-    
+##################################################################################################################################################
     metsplit = str(archivoEntrada).split('/')
     n = len(metsplit)
     nomarchi = metsplit[n-1]
@@ -89,17 +93,21 @@ def descifrar():     #Función de descifrado de mensajes
 
     nmen = ""
     for caracter in textoPlano:
+##################################################################################################################################################
         nmen += str(chr(( invmulta * ord(caracter) + invaddb % n ))) ## Corregir rango y revisar alfabeto
-    
+##################################################################################################################################################
+
     metsplit = str(archivoEntrada).split('/')
     n = len(metsplit)
     nomarchi = metsplit[n-1]
     print(nomarchi)
     nomarchi = nomarchi.split('.')
     salida = str(nomarchi[0]) + "-d.txt"
+
+    nmenout = nmen.title()
     
     f2 = open(salida, 'a')
-    f2.write(nmen)
+    f2.write(nmenout)
     f2.close() 
 
 #Ventana principal de la interfaz grafica
