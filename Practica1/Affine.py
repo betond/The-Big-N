@@ -32,6 +32,14 @@ def maximo_comun_divisor(n, a):
         return n
     return maximo_comun_divisor(a, n % a)    
 
+#Algoritmo de Euclides extendido con recursividad
+def extended_gcd(a, b):
+    if a == 0:
+        return b, 0, 1
+    else:
+        gcd, x, y = extended_gcd(b % a, a)
+        return gcd, y - (b // a) * x, x
+
 def validarEntradas():
     
     mcd = maximo_comun_divisor(int(entradaN.get()), int(entradaAlfa.get()))
@@ -63,9 +71,8 @@ def cifrar():       #Función de cifrado de mensajes
 
     nmen = ""
     for caracter in textoPlano:
-##################################################################################################################################################
-        nmen += str(chr(( a * ord(caracter) + b % n ))) ## Corregir rango y revisar alfabeto
-##################################################################################################################################################
+        nmen += str(chr(( a * "ord(caracter)" + b % n ))) ## Cifrado affine
+
     metsplit = str(archivoEntrada).split('/')
     n = len(metsplit)
     nomarchi = metsplit[n-1]
@@ -86,7 +93,10 @@ def descifrar():     #Función de descifrado de mensajes
     b = int(entradaBeta.get())
     n = int(entradaN.get())
 
-    invmulta = 3           ## pendiente de solución
+    gcd, x, invmulta = extended_gcd(n, a)
+
+    print(str(gcd) + "---------------" + str(invmulta) + "----------------" + str(x) )
+
     invaddb = n - b
 
     print(str(invmulta) + "<------------------------->" + str(invaddb))
