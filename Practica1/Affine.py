@@ -9,6 +9,7 @@ except ImportError:
 archivoEntrada = ""
 #alfabeto = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5, "G":6, "H":7, "I":8, "J":9, "K":10, "L":11, "M":12, "N":13, "Ñ":14, "O":15, "P":16, "Q":17, "R":18, "S":19, "T":20, "U":21, "V":22, "W":23, "X":24, "Y":25, "Z":26}
 alfabeto = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5, "G":6, "H":7, "I":8, "J":9, "K":10, "L":11, "M":12, "N":13, "O":14, "P":15, "Q":16, "R":17, "S":18, "T":19, "U":20, "V":21, "W":22, "X":23, "Y":24, "Z":25}
+desalfabeto = {0:"A", 1:"B", 2:"C", 3:"D", 4:"E", 5:"F", 6:"G", 7:"H", 8:"I", 9:"J", 10:"K", 11:"L", 12:"M", 13:"N", 14:"O", 15:"P", 16:"Q", 17:"R", 18:"S", 19:"T", 20:"U", 21:"V", 22:"W", 23:"X", 24:"Y", 25:"Z"}
 
 def archivoReadBMP():       #Archivo de lectura 
     global archivoEntrada 
@@ -71,7 +72,7 @@ def cifrar():       #Función de cifrado de mensajes
 
     nmen = ""
     for caracter in textoPlano:
-        nmen += str(chr(( a * "ord(caracter)" + b % n ))) ## Cifrado affine
+        nmen += str( desalfabeto.get((( a * int(alfabeto.get(caracter)) + b % n )))) ## Cifrado affine
 
     metsplit = str(archivoEntrada).split('/')
     n = len(metsplit)
@@ -104,7 +105,7 @@ def descifrar():     #Función de descifrado de mensajes
     nmen = ""
     for caracter in textoPlano:
 ##################################################################################################################################################
-        nmen += str(chr(( invmulta * ord(caracter) + invaddb % n ))) ## Corregir rango y revisar alfabeto
+        nmen += str(desalfabeto.get((( invmulta * int(alfabeto.get(caracter)) + invaddb % n )))) ## Corregir rango y revisar alfabeto
 ##################################################################################################################################################
 
     metsplit = str(archivoEntrada).split('/')

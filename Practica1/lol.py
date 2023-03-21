@@ -30,7 +30,7 @@ print(
 
 """
 
-
+"""https://www.techiedelight.com/es/extended-euclidean-algorithm-implementation/#:~:text=El%20algoritmo%20euclidiano%20extendido%20es%20particularmente%20%C3%BAtil%20cuando%20a%20y,se%20utilizan%20ampliamente%20en%20criptograf%C3%ADa"""
 
 # Programa Python # para el algoritmo euclidiano extendido
 def extended_gcd(a, b):
@@ -46,5 +46,3 @@ if __name__ == '__main__':
    gcd, x, y = extended_gcd(26, 3)
    print('The GCD is', gcd)
    print(f'x = {x}, y = {y}')
-   print("#$####################################################")
- 
