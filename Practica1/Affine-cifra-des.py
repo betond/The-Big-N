@@ -59,7 +59,7 @@ def validarEntradas():
     mensajeUsuario.config(textvariable=msguser)
 
 def cifrar():       #Función de cifrado de mensajes
-    
+
     f1 = open(archivoEntrada, 'r')
     textoentrada = f1.read()
     f1.close()
