@@ -95,6 +95,7 @@ def descifrar():     #Función de descifrado de mensajes
 
     gcd, x, invmulta = extended_gcd(n, a)
     invaddb = n - b
+    print(str(gcd) + "---------" + str(x) + "---------" + str(invmulta))
 
     nmen = ""
     for caracter in textoPlano:
@@ -118,7 +119,7 @@ igu.geometry("1100x800")
 igu.title("Práctica No.1 - Criptografía - MCD (Maximo Comun Divisor) - Algoritmo ")
 
 #Mensaje al usuario
-etiquetaCifrar = tk.Label(text="Especifique la ruta de la imagen '.bmp':")
+etiquetaCifrar = tk.Label(text="Especifique la ruta del archivo de texto '.txt':")
 etiquetaCifrar.grid(pady=50 ,padx=20 ,row=0, column=0)
 
 #Campo para validar la ruta
