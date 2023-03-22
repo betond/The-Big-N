@@ -6,27 +6,6 @@ try:
 except ImportError:
     raise ImportError("Se requieren los modulos Tkinter")
 #-------------------------------------------------------------------------------------------------------------------------------#
-archivoEntrada = ""
-#alfabeto = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5, "G":6, "H":7, "I":8, "J":9, "K":10, "L":11, "M":12, "N":13, "Ñ":14, "O":15, "P":16, "Q":17, "R":18, "S":19, "T":20, "U":21, "V":22, "W":23, "X":24, "Y":25, "Z":26}
-alfabeto = {    "A":0, "B":1, "C":2, "D":3, "E":4, "F":5, "G":6, "H":7, "I":8, "J":9, "K":10, "L":11, "M":12, "N":13, "O":14, "P":15, "Q":16, "R":17, "S":18, "T":19, "U":20, "V":21, "W":22, "X":23, "Y":24, "Z":25}
-desalfabeto = { 0:"A", 1:"B", 2:"C", 3:"D", 4:"E", 5:"F", 6:"G", 7:"H", 8:"I", 9:"J", 10:"K", 11:"L", 12:"M", 13:"N", 14:"O", 15:"P", 16:"Q", 17:"R", 18:"S", 19:"T", 20:"U", 21:"V", 22:"W", 23:"X", 24:"Y", 25:"Z"}
-
-def archivoReadBMP():       #Archivo de lectura 
-    global archivoEntrada 
-    archivoEntrada = filedialog.askopenfilename()
-    if archivoEntrada:
-    # Leer el contenido (en bytes) del archivo.
-        #textoPlano = Path(archivoEntrada).read_bytes()
-        pwd = StringVar()
-        pwd.set(archivoEntrada)
-        ruta.config(textvariable=pwd)
-        botonRuta1['bg'] = 'green' # Al presionar queda azul
-        botonRuta1['fg'] = 'white' # Si pasamos el Mouse queda blanco
-    else:
-        botonRuta1['bg'] = 'red' # Al presionar queda azul
-        botonRuta1['fg'] = 'white' # Si pasamos el Mouse queda blanco
-        print("No se ha seleccionado ningún archivo.")
-
 #Algoritmo de Euclides con recursividad
 def maximo_comun_divisor(n, a):
     if a == 0:
@@ -58,36 +37,17 @@ def validarEntradas():
 
     mensajeUsuario.config(textvariable=msguser)
 
-def cifrar():       #Función de cifrado de mensajes
-    
-    f1 = open(archivoEntrada, 'r')
-    textoentrada = f1.read()
-    f1.close()
+def cifrar():       #Función generadora de función de cifrado
 
-    textoPlano = textoentrada.upper()
     a = int(entradaAlfa.get())
     b = int(entradaBeta.get())
     n = int(entradaN.get())
 
-    nmen = ""
-    for caracter in textoPlano:
-        nmen += str( desalfabeto.get((((a*int(alfabeto.get(caracter))+b)%n)))) ## Cifrado affine
-
-    metsplit = str(archivoEntrada).split('/')
-    n = len(metsplit)
-    nomarchi = metsplit[n-1]
-    nomarchi = nomarchi.split('.')
-    salida = str(nomarchi[0]) + "-c.txt"
-    
-    f2 = open(salida, 'a')
-    f2.write(nmen)
-    f2.close()  
-
+    funcCifrado = StringVar()
+    funcCifrado.set("C = " + str(a) + " m " + " + " + str(b) + " mod " + str(n))
+    fCifrado.config(textvariable=funcCifrado)
 
 def descifrar():     #Función de descifrado de mensajes
-    f1 = open(archivoEntrada, 'r')
-    textoPlano = f1.read()
-    f1.close()
 
     a = int(entradaAlfa.get())
     b = int(entradaBeta.get())
@@ -95,40 +55,21 @@ def descifrar():     #Función de descifrado de mensajes
 
     gcd, x, invmulta = extended_gcd(n, a)
     invaddb = n - b
-    print(str(gcd) + "---------" + str(x) + "---------" + str(invmulta))
 
-    nmen = ""
-    for caracter in textoPlano:
-        nmen += str(desalfabeto.get((((invmulta*(int(alfabeto.get(caracter))+invaddb))%n))))
+    nvalores = StringVar()
+    nvalores.set("El maximo comun divisor es: " + str(gcd) + "\nEl inverso miltiplicativo de n es: " + str(x) + "\nEl inverso multiplicativo de alfa es: " + str(invmulta))
+    valoresdes.config(textvariable=nvalores)
 
-    metsplit = str(archivoEntrada).split('/')
-    n = len(metsplit)
-    nomarchi = metsplit[n-1]
-    nomarchi = nomarchi.split('.')
-    salida = str(nomarchi[0]) + "-d.txt"
+    simpli = (invmulta*invaddb)%n
 
-    nmenout = nmen.title()
-    
-    f2 = open(salida, 'a')
-    f2.write(nmenout)
-    f2.close() 
+    funcDesc = StringVar()
+    funcDesc.set("m = " + str(invmulta) + "( C + " + str(invaddb) + " ) mod " + str(n) + "\nm = " + str(invmulta) + " C + " + str(simpli) + " mod " + str(n))
+    fDescifrado.config(textvariable=funcDesc)
 
 #Ventana principal de la interfaz grafica
 igu = tk.Tk()
 igu.geometry("1100x800")
 igu.title("Práctica No.1 - Criptografía - MCD (Maximo Comun Divisor) - Algoritmo ")
-
-#Mensaje al usuario
-etiquetaCifrar = tk.Label(text="Especifique la ruta del archivo de texto '.txt':")
-etiquetaCifrar.grid(pady=50 ,padx=20 ,row=0, column=0)
-
-#Campo para validar la ruta
-ruta = tk.Label(igu, text="Sin selección", width=60)
-ruta.grid(row=0, column=1)
-
-#Botón de acción del explorador de archivos
-botonRuta1 = tk.Button(igu, text="  RUTA-Entrada ", command=archivoReadBMP)
-botonRuta1.grid(row=1, column=2)
 
 #Mensaje al usuario Alfa
 etiquetaAlfa = tk.Label(text="Introduzca el valor de alfa: ")
@@ -158,16 +99,28 @@ entradaN.grid(pady=15, row=4, column=2)
 mensajeUsuario = tk.Label(igu, text="Sin probar", width=60)
 mensajeUsuario.grid(row=6, column=1)
 
+#Campo mensaje inverso multiplicativo
+valoresdes = tk.Label(igu, text="Sin valores", width=60)
+valoresdes.grid(pady=15 ,row=7, column=1)
+
 #Botón Validar entradas
 botonValEnt = tk.Button(igu, text="Validar entradas", command=validarEntradas)
 botonValEnt.grid(pady=150, row=5, column=0)
 
-#Botón cifrar - 
-botonCifrar = tk.Button(igu, text="Cifrar", command=cifrar)
+#Botón Función de Cifrado
+botonCifrar = tk.Button(igu, text="Generar Función de Cifrado", command=cifrar)
 botonCifrar.grid(pady=150, row=5, column=1)
 
-#Botón descifrar - 
-botonDescifrar = tk.Button(igu, text="Descifrar", command=descifrar)
+#Botón Función de Descifrado
+botonDescifrar = tk.Button(igu, text="Generar Función de Descifrado", command=descifrar)
 botonDescifrar.grid(pady=150 ,row=5, column=2)
+
+#Función de cifrado
+fCifrado = tk.Label(igu, text="Sin valores", width=60)
+fCifrado.grid(pady=15 ,row=8, column=1)
+
+#Función de Descifrado
+fDescifrado = tk.Label(igu, text="Sin valores", width=60)
+fDescifrado.grid(pady=15 ,row=9, column=1)
 
 igu.mainloop()
