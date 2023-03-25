@@ -44,7 +44,7 @@ def cifrar():       #Función generadora de función de cifrado
     n = int(entradaN.get())
 
     funcCifrado = StringVar()
-    funcCifrado.set("C = " + str(a) + " m " + " + " + str(b) + " mod " + str(n))
+    funcCifrado.set("La función de cifrado es:\n C = " + str(a) + " m " + " + " + str(b) + " mod " + str(n))
     fCifrado.config(textvariable=funcCifrado)
 
 def descifrar():     #Función de descifrado de mensajes
@@ -63,64 +63,64 @@ def descifrar():     #Función de descifrado de mensajes
     simpli = (invmulta*invaddb)%n
 
     funcDesc = StringVar()
-    funcDesc.set("m = " + str(invmulta) + "( C + " + str(invaddb) + " ) mod " + str(n) + "\nm = " + str(invmulta) + " C + " + str(simpli) + " mod " + str(n))
+    funcDesc.set("La función de descifrado es:\n m = " + str(invmulta) + "( C + " + str(invaddb) + " ) mod " + str(n) + "\nm = " + str(invmulta) + " C + " + str(simpli) + " mod " + str(n))
     fDescifrado.config(textvariable=funcDesc)
 
 #Ventana principal de la interfaz grafica
 igu = tk.Tk()
-igu.geometry("1100x800")
+igu.geometry("960x800")
 igu.title("Práctica No.1 - Criptografía - MCD (Maximo Comun Divisor) - Algoritmo ")
 
 #Mensaje al usuario Alfa
 etiquetaAlfa = tk.Label(text="Introduzca el valor de alfa: ")
-etiquetaAlfa.grid(pady=20 ,padx=20 ,row=3, column=0)
+etiquetaAlfa.grid(pady=40 ,padx=20 ,row=1, column=0)
 
 #Entrada de Alfa
 entradaAlfa = tk.Entry(justify=CENTER)
-entradaAlfa.grid(pady=15, row=4, column=0)
+entradaAlfa.grid(pady=15, row=2, column=0)
 
 #Mensaje al usuario Beta
 etiquetaBeta = tk.Label(text="Introduzca el valor de beta: ")
-etiquetaBeta.grid(pady=20 ,padx=20 ,row=3, column=1)
+etiquetaBeta.grid(pady=40 ,padx=20 ,row=1, column=1)
 
 #Entrada de Beta
 entradaBeta = tk.Entry(justify=CENTER)
-entradaBeta.grid(pady=15, row=4, column=1)
+entradaBeta.grid(pady=15, row=2, column=1)
 
 #Mensaje al usuario n
 etiquetaN = tk.Label(text="Introduzca el valor de n:")
-etiquetaN.grid(pady=20 ,padx=20 ,row=3, column=2)
+etiquetaN.grid(pady=40 ,padx=20 ,row=1, column=2)
 
 #Entrada de n
 entradaN = tk.Entry(justify=CENTER)
-entradaN.grid(pady=15, row=4, column=2)
+entradaN.grid(pady=15, row=2, column=2)
 
 #Campo mensaje usuario
 mensajeUsuario = tk.Label(igu, text="Sin probar", width=60)
-mensajeUsuario.grid(row=6, column=1)
+mensajeUsuario.grid(row=4, column=1)
 
 #Campo mensaje inverso multiplicativo
 valoresdes = tk.Label(igu, text="Sin valores", width=60)
-valoresdes.grid(pady=15 ,row=7, column=1)
+valoresdes.grid(pady=15 ,row=5, column=1)
 
 #Botón Validar entradas
 botonValEnt = tk.Button(igu, text="Validar entradas", command=validarEntradas)
-botonValEnt.grid(pady=150, row=5, column=0)
+botonValEnt.grid(pady=150, row=3, column=0)
 
 #Botón Función de Cifrado
 botonCifrar = tk.Button(igu, text="Generar Función de Cifrado", command=cifrar)
-botonCifrar.grid(pady=150, row=5, column=1)
+botonCifrar.grid(pady=150, row=3, column=1)
 
 #Botón Función de Descifrado
 botonDescifrar = tk.Button(igu, text="Generar Función de Descifrado", command=descifrar)
-botonDescifrar.grid(pady=150 ,row=5, column=2)
+botonDescifrar.grid(pady=150 ,row=3, column=2)
 
 #Función de cifrado
 fCifrado = tk.Label(igu, text="Sin valores", width=60)
-fCifrado.grid(pady=15 ,row=8, column=1)
+fCifrado.grid(pady=15 ,row=6, column=1)
 
 #Función de Descifrado
 fDescifrado = tk.Label(igu, text="Sin valores", width=60)
-fDescifrado.grid(pady=15 ,row=9, column=1)
+fDescifrado.grid(pady=15 ,row=7, column=1)
 
 igu.mainloop()
