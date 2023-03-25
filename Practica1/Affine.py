@@ -127,7 +127,6 @@ def descifrar():     #Función de descifrado de mensajes
     fDescifrado.config(textvariable=funcDesc)
     fDescifrado['bg'] = 'yellow'
 
-
 #Ventana principal de la interfaz grafica
 igu = tk.Tk()
 igu.geometry("1000x800")
