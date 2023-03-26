@@ -137,7 +137,7 @@ etiquetaAlpha = tk.Label(text="Introduzca el valor de Alpha: ")
 etiquetaAlpha.grid(pady=40 ,padx=30 ,row=1, column=0)
 
 #Campo advertencia al usuario Alpha
-mensajeAlpha = tk.Label(igu, text="...")
+mensajeAlpha = tk.Label(igu)
 mensajeAlpha.grid(row=3, column=0)
 
 #Entrada de Alpha
@@ -149,7 +149,7 @@ etiquetaBeta = tk.Label(text="Introduzca el valor de beta: ")
 etiquetaBeta.grid(pady=40 ,padx=20 ,row=1, column=1)
 
 #Campo advertencia al usuario Beta
-mensajeBeta = tk.Label(igu, text="...")
+mensajeBeta = tk.Label(igu)
 mensajeBeta.grid(row=3, column=1)
 
 #Entrada de Beta
@@ -161,7 +161,7 @@ etiquetaN = tk.Label(text="Introduzca el valor de n:")
 etiquetaN.grid(pady=40 ,padx=20 ,row=1, column=2)
 
 #Campo advertencia al usuario N
-mensajeN = tk.Label(igu, text="...")
+mensajeN = tk.Label(igu)
 mensajeN.grid(row=3, column=2)
 
 #Entrada de n
