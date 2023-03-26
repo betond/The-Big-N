@@ -106,7 +106,7 @@ def cifrar():       #Función generadora de función de cifrado
     fCifrado.config(textvariable=funcCifrado)
     fCifrado['bg'] = 'yellow'
 
-def descifrar():     #Función de descifrado de mensajes
+def descifrar():     #Función generadora de función de descifrado
 
     a = int(entradaAlpha.get())
     b = int(entradaBeta.get())
