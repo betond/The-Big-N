@@ -2,7 +2,6 @@ try:
     from six.moves import tkinter as tk
     from tkinter import *
     from tkinter import filedialog
-
 except ImportError:
     raise ImportError("Se requieren los modulos Tkinter")
 #-------------------------------------------------------------------------------------------------------------------------------#
