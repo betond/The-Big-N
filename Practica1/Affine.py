@@ -37,14 +37,16 @@ def validarEntradas():
     
     if b<0:
         equiv = abs(n+b)
+        b = equiv
         errorbeta.set("Error: Beta debe ser parte del conjunto (0," + str(n) + "]\n Beta debe ser mayor que 0 : Valor equivalente= " + str(equiv))
-        mensajeBeta['bg'] = 'red'   #Color rojo - Advertencia
-        entradaBeta['bg'] = 'red'   #Color rojo - Advertencia
+        mensajeBeta['bg'] = 'yellow'   #Color rojo - Advertencia
+        entradaBeta['bg'] = 'yellow'   #Color rojo - Advertencia
     elif b>n:
         equiv = b%n
+        b = equiv
         errorbeta.set("Error: Beta debe ser parte del conjunto (0," + str(n) + "]\n Beta debe ser menor que " + str(n) + " : Valor equivalente= " + str(equiv))
-        mensajeBeta['bg'] = 'red'   #Color rojo - Advertencia
-        entradaBeta['bg'] = 'red'   #Color rojo - Advertencia
+        mensajeBeta['bg'] = 'yellow'   #Color rojo - Advertencia
+        entradaBeta['bg'] = 'yellow'   #Color rojo - Advertencia
     else:
         errorbeta.set("El valor pertenece al conjunto (0,"+ str(n) +"]")
         mensajeBeta['bg'] = 'green'   #Color verde - Validado
@@ -100,6 +102,13 @@ def cifrar():       #Función generadora de función de cifrado
     b = int(entradaBeta.get())
     n = int(entradaN.get())
 
+    if b<0:
+        equiv = abs(n+b)
+        b = equiv
+    elif b>n:
+        equiv = b%n
+        b = equiv
+
     funcCifrado = StringVar()
     funcCifrado.set("La función de cifrado es:\n C = " + str(a) + " m " + " + " + str(b) + " mod " + str(n))
     fCifrado.config(textvariable=funcCifrado)
@@ -110,6 +119,13 @@ def descifrar():     #Función generadora de función de descifrado
     a = int(entradaAlpha.get())
     b = int(entradaBeta.get())
     n = int(entradaN.get())
+
+    if b<0:
+        equiv = abs(n+b)
+        b = equiv
+    elif b>n:
+        equiv = b%n
+        b = equiv
 
     gcd, invn, inva = extended_gcd(n, a)
     invaddb = n - b
