@@ -3,6 +3,7 @@ try:
     from tkinter import *
     from tkinter import filedialog
     from Crypto.PublicKey import RSA # Importamos el módulo RSA
+    from Crypto.Cipher import PKCS1_OAEP # Importamos el modulo de cifrado y descifrado
 
 except ImportError:
     raise ImportError("Se requiere el modulo Tkinter y pycryptodome")
@@ -24,7 +25,7 @@ def archivoReadtxt():       #Archivo de lectura
     else:
         print("No se ha seleccionado ningún archivo.")
 
-def archivoReadkey():       #Archivo de la llave
+def importReadkey():       #Archivo de la llave
     global archivokey 
     archivokey = filedialog.askopenfilename()
     if archivokey:
@@ -32,7 +33,7 @@ def archivoReadkey():       #Archivo de la llave
         #textoPlano = Path(archivoEntrada).read_bytes()
         pwd = StringVar()
         pwd.set(archivokey)
-        ruta.config(textvariable=pwd)
+        rutaSalida.config(textvariable=pwd)
         botonRuta2['bg'] = 'blue' # Al presionar queda azul
         botonRuta2['fg'] = 'white' # Si pasamos el Mouse queda blanco
     else:
@@ -43,10 +44,10 @@ def cifrar():       #Función de cifrado de mensajes
     textoPlano = f1.read()
     f1.close()
 
-    nmen = ""
-####################################################
+    llave = RSA.import_key(open(archivokey).read())
+    nuevoCifrado = PKCS1_OAEP.new(llave)
 
-####################################################
+    nmen = str(nuevoCifrado.encrypt(textoPlano.encode()).decode())
 
     metsplit = str(archivoMensaje).split('/')
     n = len(metsplit)
@@ -64,11 +65,10 @@ def decifrar():     #Función de decifrado de mensajes
     textoPlano = f1.read()
     f1.close()
     
-    nmen = ""
-#####################################################
+    llave = RSA.importKey(open(archivokey).read())
+    nuevoDescifrado = PKCS1_OAEP.new(llave)
 
-
-#####################################################
+    nmen = nuevoDescifrado.decrypt(textoPlano)
 
     metsplit = str(archivoMensaje).split('/')
     n = len(metsplit)
@@ -108,7 +108,7 @@ rutaSalida = tk.Label(igu, text="Sin selección", width=60)
 rutaSalida.grid(row=3, column=1)
 
 #Botón de acción del explorador de archivos
-botonRuta2 = tk.Button(igu, text="  RUTA-Llave ", command=archivoReadkey)
+botonRuta2 = tk.Button(igu, text="  RUTA-Llave ", command=importReadkey)
 botonRuta2.grid(row=4, column=2)
 
 #Botón cifrar - 
