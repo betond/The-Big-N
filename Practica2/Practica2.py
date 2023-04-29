@@ -47,7 +47,10 @@ def cifrar():       #Función de cifrado de mensajes
     llave = RSA.import_key(open(archivokey).read())
     nuevoCifrado = PKCS1_OAEP.new(llave)
 
-    nmen = str(nuevoCifrado.encrypt(textoPlano.encode()).decode())
+    textoPlano = textoPlano.encode(encoding="ascii")
+    print(str(textoPlano))
+
+    nmen = str(nuevoCifrado.encrypt(textoPlano).decode())
 
     metsplit = str(archivoMensaje).split('/')
     n = len(metsplit)
@@ -56,17 +59,22 @@ def cifrar():       #Función de cifrado de mensajes
     nomarchi = nomarchi.split('.')
     salida = str(nomarchi[0]) + "-c.txt"
     
-    f2 = open(salida, 'a')
+    f2 = open(salida, 'w')
     f2.write(nmen)
     f2.close()  
 
 def decifrar():     #Función de decifrado de mensajes
-    f1 = open(archivoMensaje, 'r')
-    textoPlano = f1.read()
+    f1 = open(archivoMensaje, 'rb')
+    textoPlano = f1.read().decode(errors='replace')
     f1.close()
     
     llave = RSA.importKey(open(archivokey).read())
     nuevoDescifrado = PKCS1_OAEP.new(llave)
+
+    textobytes = textoPlano.split('.')
+
+    for elemento in textobytes:
+        print(elemento)
 
     nmen = nuevoDescifrado.decrypt(textoPlano)
 
@@ -77,7 +85,7 @@ def decifrar():     #Función de decifrado de mensajes
     nomarchi = nomarchi.split('.')
     salida = str(nomarchi[0]) + "-d.txt"
     
-    f2 = open(salida, 'a')
+    f2 = open(salida, 'w')
     f2.write(nmen)
     f2.close()
     
