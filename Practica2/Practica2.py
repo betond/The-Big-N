@@ -2,8 +2,8 @@ try:
     from six.moves import tkinter as tk
     from tkinter import *
     from tkinter import filedialog
-    from Crypto.PublicKey import RSA # Importamos el módulo RSA
-    from Crypto.Cipher import PKCS1_OAEP # Importamos el modulo de cifrado y descifrado
+    from Cryptodome.PublicKey import RSA # Importamos el módulo RSA
+    from Cryptodome.Cipher import PKCS1_OAEP # Importamos el modulo de cifrado y descifrado
 
 except ImportError:
     raise ImportError("Se requiere el modulo Tkinter y pycryptodome")
