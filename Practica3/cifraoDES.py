@@ -35,8 +35,8 @@ def cifrar():       #Función de cifrado de mensajes
     image = numpy.array(img)
     image_size = img.size
     
-    key = pad(bytes(entradaClave.get(), 'utf-8'), 16)
-    ivs = pad(bytes(entradaVector.get(), 'utf-8'), 16)
+    key = pad(bytes(entradaClave.get(), 'utf-8'), 8)
+    ivs = pad(bytes(entradaVector.get(), 'utf-8'), 8)
 
     modoDoperacipon = combo.get()
 
@@ -68,7 +68,7 @@ def cifrar():       #Función de cifrado de mensajes
     nomarchi = metsplit[n-1]
     print(nomarchi)
     nomarchi = nomarchi.split('.')
-    archivoSalida = str(nomarchi[0]) + "-c.bmp"
+    archivoSalida = str(nomarchi[0]) + "_MODE_" + combo.get() + "-c.bmp"
 
     #Guradado de la imagen cifrada
     image_nva.save(archivoSalida)
@@ -84,8 +84,8 @@ def descifrar():     #Función de descifrado de mensajes
     image = numpy.array(img)
     image_size = img.size
 
-    key = pad(bytes(clave, 'utf-8'), 16)
-    ivs = pad(bytes(vector, 'utf-8'), 16)
+    key = pad(bytes(clave, 'utf-8'), 8)
+    ivs = pad(bytes(vector, 'utf-8'), 8)
 
     cipher = None
     modoDoperacipon = combo.get()
@@ -116,7 +116,7 @@ def descifrar():     #Función de descifrado de mensajes
     nomarchi = metsplit[n-1]
     print(nomarchi)
     nomarchi = nomarchi.split('.')
-    archivoSalida = str(nomarchi[0]) + "-d.bmp"
+    archivoSalida = str(nomarchi[0]) + "_MODE_" + combo.get() + "-d.bmp"
 
     #Guardado de la imagen descifrada
     Image.frombuffer("RGB",image_size,img_data).save(archivoSalida)
