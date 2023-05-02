@@ -50,10 +50,11 @@ def cifrar():       #Función de cifrado de mensajes
         cipher = DES.new(key, DES.MODE_CFB, ivs)
     elif modoDoperacipon == "OFB":    #Para modo "OFB"
         cipher = DES.new(key, DES.MODE_OFB, ivs)
-    elif modoDoperacipon == "CTR":    #Para modo "CTR"
-        cipher = DES.new(key, DES.MODE_CTR, ivs)
     else:                               #Para error de selección
-        int = 0
+        msguser = StringVar()
+        msguser.set("Selección de metodo erronea")
+        mensajeUsuario.config(textvariable=msguser)
+        mensajeUsuario['bg'] = 'red'   #Color rojo - Advertencia
 
 
     ct_bytes = cipher.encrypt(pad(image.tobytes(),DES.block_size,))
@@ -100,10 +101,11 @@ def descifrar():     #Función de descifrado de mensajes
         cipher = DES.new(key, DES.MODE_CFB, ivs)
     elif modoDoperacipon == "OFB":    #Para modo "OFB"
         cipher = DES.new(key, DES.MODE_OFB, ivs)
-    elif modoDoperacipon == "CTR":    #Para modo "CTR"
-        cipher = DES.new(key, DES.MODE_CTR, ivs)
     else:                               #Para error de selección
-        int = 0
+        msguser = StringVar()
+        msguser.set("Selección de metodo erronea")
+        mensajeUsuario.config(textvariable=msguser)
+        mensajeUsuario['bg'] = 'red'
 
     aux = image.tobytes()
     pt = cipher.decrypt(aux)
@@ -125,7 +127,7 @@ def descifrar():     #Función de descifrado de mensajes
 
 #Ventana principal de la interfaz grafica
 igu = tk.Tk()
-igu.geometry("1100x600")
+igu.geometry("1100x800")
 igu.title("Práctica No.3 - Cifrador de imagenes DES - Criptografía")
 
 #Mensaje al usuario
@@ -167,6 +169,11 @@ botonCifrar.grid(pady=150, row=5, column=1)
 #Botón descifrar - 
 botonDescifrar = tk.Button(igu, text="Descifrar", command=descifrar)
 botonDescifrar.grid(pady=150 ,row=5, column=2)
+
+#Campo mensaje usuario
+mensajeUsuario = tk.Label(igu, text="Sin probar", width=60)
+mensajeUsuario.grid(row=6, column=1)
+mensajeUsuario['bg'] = 'white'
 
 
 igu.mainloop()
