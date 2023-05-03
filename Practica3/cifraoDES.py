@@ -85,6 +85,8 @@ def descifrar():     #Función de descifrado de mensajes
     image = numpy.array(img)
     image_size = img.size
 
+    # clave propuesta equipo10
+
     key = pad(bytes(clave, 'utf-8'), 8)
     ivs = pad(bytes(vector, 'utf-8'), 8)
 
