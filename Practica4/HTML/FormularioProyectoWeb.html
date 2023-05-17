@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Registro de datos generales - Enero 2022 </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="../CSS/clases.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container pt-4 text-center">
+        <table class="table ">
+            <tr>
+                <td>
+                    <img src="../Imagenes/IPN-logo.png" height="250">
+                </td>
+                <td>
+                    <div class="text-center">
+                        <br>
+                        <h1>Registro de Datos Generales</h1>
+                        <h2>Alumnos de Nuevo Ingreso (Enero 2022)</h2>
+                        <h3 class="text-center pt-5">Por favor ingrese los siguientes datos:</h3>
+                    </div>
+                </td>
+                <td>
+                    <img src="../Imagenes/logoESCOMBlanco.png" height="200">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="form-control container">
+    <form  method="post" action="../PHP/Recibe.php" name="Formulario" id="Formulario">
+        <fieldset >
+            <legend><strong>Identidad:</strong></legend>
+            <label for="nboleta">No. de boleta:</label>
+                <input type="text" name="nboleta" id="nboleta" onkeyup="validaBol(this)" size="12" maxlength="10" required>
+                <sub id="rbol"></sub>
+                <br><br>
+            <label for="nombre">Nombre:</label>
+                <input type="text" name="nombre" onkeyup="validaNom(this)" size="30"  id="nombre" required>
+                <sub id="rnom"></sub>
+                <br><br>
+            <label for="aPaterno">Apellido paterno:</label>
+                <input type="text" name="aPaterno" onkeyup="validaAp(this)" size="30" id="aPaterno" required>
+                <sub id="rap"></sub>
+                <br><br>
+            <label for="aMaterno">Apellido materno:</label>
+                <input type="text" name="aMaterno"  onkeyup="validaAm(this)" size="30" id="aMaterno" required>
+                <sub id="ram"></sub>
+                <br><br>
+            <label for="fNacimieno">Fecha de nacimiento:</label>
+                <input type="date" name="fNacimiento"  onkeyup="validaFec(this)" id="fNacimiento" required>
+                <sub id="rfec"></sub>
+                <br><br>
+            <label for="genero">Género:</label>
+                <select name="genero" id="interes" required>
+                    <option > --Selecciona una opci&oacute;n-- </option>
+                    <option value="Masculino" >Masculino</option>
+                    <option value="Femenino" >Femenino</option>
+                    <option value="s.a.">Prefiero no responder</option>
+            </select>
+            <br><br><label for="curp">CURP:</label>
+            <input type="text" name="curp" id="curp" size="22"  onkeyup="validaCurp(this)" maxlength="18" required>
+            <sub id="rcurp"></sub>
+            <br>
+        </fieldset>
+        <fieldset>
+            <legend><strong>Contacto:</strong></legend>
+            <label for="calle-Num">Calle y Número:</label>
+            <input type="text" name="calle-Num" id="calle-Num" onkeyup="validaCaNum(this)" size="30" maxlength="30" required>
+            <sub id="rcalle-Num"></sub>
+            <br><br>
+            <label for="colonia">Colonia:</label>
+            <input type="text" name="colonia" id="colonia" onkeyup="validaColonia(this)" required>
+            <sub id="rcol"></sub>
+            <br><br>
+            <label for="alcaldia">Alcaldia:</label>
+            <select name="alcaldia" id="alcaldia" required>
+                <option disabled selected> --Selecciona una opci&oacute;n-- </option>
+                <option value="Álvaro Obregón">Álvaro Obregón</option>                
+                <option value="Azcapotzalco">Azcapotzalco</option>
+                <option value="Benito Juárez">Benito Juárez</option>
+                <option value="Coyoacán">Coyoacán</option>
+                <option value="Cuajimalpa">Cuajimalpa</option>
+                <option value="Cuauhtémoc">Cuauhtémoc</option>
+                <option value="Gustavo A. Madero">Gustavo A. Madero</option>
+                <option value="Iztacalco">Iztacalco</option>
+                <option value="Iztapalapa">Iztapalapa</option>
+                <option value="Magdalena Contreras">Magdalena Contreras</option>
+                <option value="Miguel Hidalgo">Miguel Hidalgo</option>
+                <option value="Milpa Alta">Milpa Alta</option>
+                <option value="Tláhuac">Tláhuac</option>
+                <option value="Tlalpan">Tlalpan</option>
+                <option value="Venustiano Carranza">Venustiano Carranza</option>
+                <option value="Xochimilco">Xochimilco</option>
+            </select><br><br>
+            <label for="CP">Código Postal:</label>
+            <input type="number" name="CP" id="CP" size="7" onkeyup="validaCP(this)" maxlength="7" required>
+            <sub id="rcp"></sub>
+            <br><br>
+            <label for="telefono">Teléfono o celular:</label>
+            <input type="phone" name="telefono" id="telefono" size="12" onkeyup="validaTel(this)" maxlength="10" required>
+            <sub id="rtel"></sub>
+            <br><br>
+            <label for="email">Correo electrónico:</label>
+            <input type="mail" name="email" id="email" size="45" onkeyup="validaEmail(this)" required>
+            <sub id="remail"></sub>
+            <br>
+        </fieldset>
+        <fieldset>
+            <legend><strong>Procedencia:</strong></legend>
+            <label for="esc-Proc">Escuela de procedencia:</label>
+            <select name="esc-Proc" id="esc-Proc" onclick="ocultar()" required>
+                    <option value="null" disabled selected> --Selecciona una opci&oacute;n-- </option>
+                    <option value="cecyt1">CECYT #1 "GONZALO VÁZQUEZ VELA"</option>
+                    <option value="cecyt2">CECYT #2 "MIGUEL BERNARD PERALES"</option>
+                    <option value="cecyt3">CECYT #3 "ESTANISLAO RAMÍREZ RUIZ"</option>
+                    <option value="cecyt4">CECYT #4 "LÁZARO CÁRDENAS DEL RÍO"</option>
+                    <option value="cecyt5">CECYT #5 "BENITO JUÁREZ GARCÍA"</option>
+                    <option value="cecyt6">CECYT #6 "MIGUEL OTHÓN DE MENDIZÁBAL"</option>
+                    <option value="cecyt7">CECYT #7 "CUAUHTÉMOC"</option>
+                    <option value="cecyt8">CECYT #8 "NARCISO BASSOLS GARCÍA"</option>
+                    <option value="cecyt9">CECYT #9 "JUAN DE DIOS BÁTIZ PAREDES"</option>
+                    <option value="cecyt10">CECYT #10 “CARLOS VALLEJO MÁRQUEZ”</option>
+                    <option value="cecyt11">CECYT #11 "WILFRIDO MASSIEU PÉREZ"</option>
+                    <option value="cecyt12">CECYT #12 "JOSÉ MA. MORELOS Y PAVÓN"</option>
+                    <option value="cecyt13">CECYT #13 "RICARDO FLORES MAGÓN"</option>
+                    <option value="cecyt14">CECYT #14 "LUIS ENRIQUE ERRO SOLER"</option>
+                    <option value="cecyt15">CECYT #15 "DIÓDORO ANTÚNEZ ECHEGARAY"</option>
+                    <option value="cet1">CET #1 "WALTER CROSS BUCHANAN"</option>
+                    <option value="otro">otro</option>
+                </select><br><br>
+            <label for="entidad-Fed" id="txtentidad-Fed">Entidad Federativa de Procedencia:</label>
+            <select name="entidad-Fed" id="entidad-Fed">
+                    <option value="null" disabled selected>-- Selecciona una opci&oacute;n --</option>
+                    <option value="Aguascalientes">Aguascalientes</option>
+                    <option value="Baja California">Baja California</option>
+                    <option value="Baja California Sur">Baja California Sur</option>
+                    <option value="Campeche">Campeche</option>
+                    <option value="Chiapas">Chiapas</option>
+                    <option value="Chihuahua">Chihuahua</option>
+                    <option value="Ciudad de México">Ciudad de México</option>
+                    <option value="Coahuila">Coahuila</option>
+                    <option value="Colima">Colima</option>
+                    <option value="Durango">Durango</option>
+                    <option value="Guanajuato">Guanajuato</option>
+                    <option value="Guerrero">Guerrero</option>
+                    <option value="Hidalgo">Hidalgo</option>
+                    <option value="Jalisco">Jalisco</option>
+                    <option value="Estado de México">Estado de México</option>
+                    <option value="Michoacán">Michoacán</option>
+                    <option value="Morelos">Morelos</option>
+                    <option value="Nayarit">Nayarit</option>
+                    <option value="Nuevo León">Nuevo León</option>
+                    <option value="Oaxaca">Oaxaca</option>
+                    <option value="Puebla">Puebla</option>
+                    <option value="Querétaro">Querétaro</option>
+                    <option value="Quintana Roo">Quintana Roo</option>
+                    <option value="San Luis Potosí">San Luis Potosí</option>
+                    <option value="Sinaloa">Sinaloa</option>
+                    <option value="Sonora">Sonora</option>
+                    <option value="Tabasco">Tabasco</option>
+                    <option value="Tamaulipas">Tamaulipas</option>
+                    <option value="Tlaxcala">Tlaxcala</option>
+                    <option value="Veracruz">Veracruz</option>
+                    <option value="Yucatán">Yucatán</option>
+                    <option value="Zacatecas">Zacatecas</option>
+                </select><br><br>
+            <label for="nom-esc" id="txtnom-esc">Nombre de la Escuela:</label>
+            <input type="text" name="nom-esc" id="nom-esc" size="50" onkeyup="validaNomEsc(this)" maxlength="50">
+            <sub id="resc-Proc"></sub>
+            <br><br>
+            <label for="promedio">Promedio:</label>
+            <input type="number" name="promedio" id="promedio" step="0.01" min="0" max="10" onkeyup="validaPro(this)" placeholder="00.00" required>
+            <sub id="rpro"></sub>
+            <br><br>
+            <label for="opcion"> ESCOM fué tu: </label><br>
+            <input type="radio" name="opcion" value="1" required><label>Primera opción</label><br>
+            <input type="radio" name="opcion" value="2" required><label>Segunda opción</label><br>
+            <input type="radio" name="opcion" value="3" required><label>Tercera opción</label><br>
+            <input type="radio" name="opcion" value="4" required><label>Cuarta opción</label> <br>
+        </fieldset><br>
+        <div class="container text-center">
+            <input class=".pos-boton" id="enviar" type="submit" value="          Enviar          ">
+            &NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;
+            <input class=".pos-boton" type="reset" value="          Limpiar          "><br><br>
+        </div>
+    </form>
+
+    </div>
+    <div class="pt-3 .color-div">
+        <h5 class="text-center" > Instituto Politecnico Nacional - Escuela Superior de Computo - Enero (2022) </h5>
+    </div>
+
+    <script src="../JavaScript/validaciones.js"></script>
+
+</body>
+</html>

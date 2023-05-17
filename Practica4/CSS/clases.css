@@ -1,0 +1,25 @@
+*{
+    box-sizing: border-box;
+}
+
+input.invalid { border-color: #DD2C00;}
+input.valid { border-color: #006400;}
+
+body{
+    background-image: url(../Imagenes/unnamed.jpg);
+    box-sizing: border-box;
+}
+
+div{
+    color: whitesmoke;
+}
+
+form{
+    background-color: #FFF;
+    border-color: whitesmoke;
+    border: 10px 30px solid;
+    margin: 10px 30px;
+}
+.color-div{
+    color: #000;
+}
