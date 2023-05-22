@@ -8,15 +8,28 @@ template_dir = os.path.join(template_dir, 'src', 'templates')
 
 app = Flask(__name__)
 
-@app.route('/', methods=['POST'])
+@app.route('/')
 def signIn():
     #cursor = db.database.cursor()
     #cursor.execute("SELEC * FROM user")
     #cursor.close
-    return render_template('signin.html')
+    return render_template('signIn.html')
+
+@app.route('/verificacion')
+def VerEmail():
+    
+    return render_template('VerEmail.html')
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
+@app.route('/lostpass')
+def lostpass():
+    return render_template('lostpass.html')
 
 #registro de usuarios
-@app.route('/signup', methods=['POST'])
+@app.route('/signup')
 def signUp():
     #username = request.form['username']
     #password = request.form['password']
@@ -30,17 +43,8 @@ def signUp():
     #    data = (username, hash, email, val)
     #    cursor.execute(sql, data)
     #    db.database.commit()
-    #    return render_template('home.html')
-        
+    #    return render_template('home.html')  
     return render_template('signUp.html')
-
-@app.route('/home')
-def home():
-    return render_template('home.html')
-
-@app.route('/lostpass')
-def lostpass():
-    return render_template('lostpass.html')
 
 if __name__=='__main__':
     app.run(debug=True)

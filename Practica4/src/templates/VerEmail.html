@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión</title>
+    <title>Verificación de Email</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -53,17 +53,11 @@
 </head>
 <body>
     <div class="container">
-        <h1>Iniciar sesión</h1>
-        <form action="/home">
-          <input type="text" name="username" placeholder="Nombre de usuario" required>
-          <br>
-          <input type="password" name="password" placeholder="Contraseña" required>
-          <br>
-          <button type="submit">Iniciar sesión</button>
-          <br><br>
-          <a href="{{url_for('lostpass')}}">Recuperar contraseña</a>
+        <h1>Verificación de email</h1>
+        <form action="/">
+          <input type="text" name="codigoVer" placeholder="Codigo de verificación" required>
           <br><br><br>
-          <a href="{{url_for('signUp')}}">Registrarse</a>
+          <button type="submit">Validar</button>
         </form>
       </div>
 </body>
