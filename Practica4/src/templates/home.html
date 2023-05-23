@@ -3,7 +3,7 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-<h1>Bienvenido, {{ current_user.fullname }}</h1>
+<h1>Bienvenido, {{ current_user.username }}</h1>
 
     <div class="container">
         <h1>La trama Babington para asesinar a Isabel I</h1>
@@ -17,5 +17,7 @@
 <br>
 <br>
 <a class="btn btn-secondary" href="{{ url_for('logout') }}">Logout</a>
+<br>
+<br>
 
 {% endblock %}
