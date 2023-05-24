@@ -54,9 +54,37 @@ def home():
 
 @app.route('/lostpass', methods=['GET','POST'])
 def lostpass():
+    global code
     if request.method == 'POST':
-        
-        return render_template('lostpass.html')   
+        user = User(0, request.form['username'], request.form['npass'])
+        logged_user = ModelUser.login(db, user)
+        if logged_user != None:
+            if request.form['codigoVer'] != '':
+                if code == request.form['codigoVer']:
+                    username = request.form['username']
+                    hpassword = generate_password_hash(request.form['npass'])              
+                    sql = f"UPDATE user SET hpassword = '{hpassword}' WHERE username = '{username}'"
+                    db.connection.cursor().execute(sql)
+                    db.connection.commit()
+                    return redirect(url_for('signIn'))
+                else:
+                    flash("Codigo de verificación incorrecto.")
+                    return redirect(url_for('lostpass'))
+            else:
+                user = User(0, request.form['username'],'', '')
+                search_user = ModelUser.login(db, user)
+                if search_user.email:
+                    email = search_user.email
+                    ver = ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(leng))
+                    code = ver
+                    msg = "El codigo de recuperación de contraseña es: " + code
+                    SendCorreo(email, msg,"Verificación de email.")
+                    flash("Ingrese los datos de nuevo e ingresa el codigo de verificación. ")
+                    return redirect(url_for('lostpass'))
+
+        else:
+            flash("Usuario no encontrado...")
+            return render_template('lostpass.html')   
     else:
         return render_template('lostpass.html')
 
