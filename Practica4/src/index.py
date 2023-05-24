@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+from werkzeug.security import generate_password_hash
 from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_user, logout_user, login_required
+from models.smtp.correo import SendCorreo
+import random, string
 
 from config import config
 # Models:
@@ -9,8 +12,10 @@ from models.ModelUser import ModelUser
 # Entities:
 from models.entities.User import User
 
-app = Flask(__name__)
+code = ''
+leng = int(8)
 
+app = Flask(__name__)
 
 #csrf = CSRFProtect()
 db = MySQL(app)
@@ -42,35 +47,47 @@ def signIn():
     else:
         return render_template('signIn.html')
 
-
-@app.route('/verificacion', methods=['GET','POST'])
-def VerEmail():
-    if request.method == 'POST':
-        return render_template('VerEmail.html')
-    else:
-        return render_template('VerEmail.html')
-
-@app.route('/home', methods=['GET','POST'])
+@app.route('/home')
 @login_required
 def home():
-    if request.method == 'POST':
-        return render_template('home.html')
-    else:
         return render_template('home.html')
 
 @app.route('/lostpass', methods=['GET','POST'])
 def lostpass():
     if request.method == 'POST':
+        
         return render_template('lostpass.html')   
     else:
         return render_template('lostpass.html')
 
 #registro de usuarios
 @app.route('/signup', methods=['GET','POST'])
-def signUp():
+def signup():
     
     if request.method == 'POST':
-        return render_template('signUp.html')
+        global code
+        if request.form['codigoVer'] != '':
+            if code == request.form['codigoVer']:
+                username = request.form['username']
+                hpassword = generate_password_hash(request.form['password'])
+                email = request.form['email']
+                sql = f"INSERT INTO user (username, hpassword, email) VALUES ('{username}','{hpassword}','{email}')"
+                db.connection.cursor().execute(sql)
+                db.connection.commit()
+                return redirect(url_for('home'))
+            else:
+                flash("Codigo de verificación incorrecto.")
+                return redirect(url_for('signup'))
+        else:
+            username = request.form['username']
+            hpassword = generate_password_hash(request.form['password'])
+            email = request.form['email']
+            ver = ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(leng))
+            code = ver
+            msg = "El codigo de verificación es: " + code
+            SendCorreo(email, msg,"Verificación de email.")
+            flash("Ingrese los datos de nuevo y verificar correo electronico. ")
+            return redirect(url_for('signup'))
     else:    
         return render_template('signUp.html')
  
