@@ -110,12 +110,18 @@ def signup():
             username = request.form['username']
             hpassword = generate_password_hash(request.form['password'])
             email = request.form['email']
-            ver = ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(leng))
-            code = ver
-            msg = "El codigo de verificación es: " + code
-            SendCorreo(email, msg,"Verificación de email.")
-            flash("Ingrese los datos de nuevo y verificar correo electronico. ")
-            return redirect(url_for('signup'))
+            user = User(0, username, hpassword)
+            logged_user = ModelUser.login(db, user)
+            if logged_user != None:
+                flash("El nombre de usuario ya ha sido registrado. Ingresé uno diferente.")
+                return render_template('signUp.html')
+            else:
+                ver = ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(leng))
+                code = ver
+                msg = "El codigo de verificación es: " + code
+                SendCorreo(email, msg,"Verificación de email.")
+                flash("Ingrese los datos de nuevo y verificar correo electronico. ")
+                return redirect(url_for('signup'))
     else:    
         return render_template('signUp.html')
  
