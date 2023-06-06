@@ -1,7 +1,8 @@
 import base64
 import os
 import struct
-from Crypto.PublicKey import RSA
+from Cryptodome.PublicKey import RSA # Importamos el módulo RSA
+from Cryptodome.Cipher import PKCS1_OAEP # Importamos el modulo de cifrado y descifrado
 
 # función para cifrar un mensaje utilizando la llave pública
 def encrypt(public_key, message):
@@ -14,7 +15,7 @@ def decrypt(private_key, cipher):
 # ejemplo de uso
 if __name__ == '__main__':
     # leemos la llave pública y privada del archivo PEM
-    with open('llaves.pem', 'r') as f:
+    with open('/home/betond971227/Escritorio/.sec/NMJA-Publica.key', 'r') as f:
         key_data = f.read()
 
     # convertimos la llave pública y privada al formato RSA
@@ -31,8 +32,3 @@ if __name__ == '__main__':
     # imprimimos el mensaje cifrado
     print('Mensaje cifrado:', base64.b64encode(cipher))
 
-    # desciframos el mensaje cifrado
-    decrypted_message = decrypt(private_key, cipher)
-
-    # imprimimos el mensaje descifrado
-    print('Mensaje descifrado:', decrypted_message)

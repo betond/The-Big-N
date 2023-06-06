@@ -4,7 +4,7 @@ try:
     from tkinter import filedialog
     from Cryptodome.PublicKey import RSA # Importamos el módulo RSA
     from Cryptodome.Cipher import PKCS1_OAEP # Importamos el modulo de cifrado y descifrado
-
+    import base64
 except ImportError:
     raise ImportError("Se requiere el modulo Tkinter y pycryptodome")
 #-------------------------------------------------------------------------------------------------------------------------------#
@@ -47,10 +47,9 @@ def cifrar():       #Función de cifrado de mensajes
     llave = RSA.import_key(open(archivokey).read())
     nuevoCifrado = PKCS1_OAEP.new(llave)
 
-    textoPlano = textoPlano.encode(encoding="ascii")
     print(str(textoPlano))
 
-    nmen = str(nuevoCifrado.encrypt(textoPlano).decode())
+    nmen = nuevoCifrado.encrypt(textoPlano.encode('utf-8') ,32)[0]
 
     metsplit = str(archivoMensaje).split('/')
     n = len(metsplit)
