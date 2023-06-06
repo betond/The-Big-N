@@ -2,8 +2,7 @@ try:
     from six.moves import tkinter as tk
     from tkinter import *
     from tkinter import filedialog
-    from PIL import Image
-    import numpy
+    import hashlib, base64
 
 except ImportError:
     raise ImportError("Se requieren los modulos Tkinter, PIL, PyCryptodome, numpy")
@@ -26,75 +25,58 @@ def archivoReadBMP():       #Archivo de lectura
         print("No se ha seleccionado ningún archivo.")
 
 
-def generarHash():       #Función de cifrado de mensajes
+def generarHash():       #Función de generación de hash
+    f1 = open(archivoEntrada, 'r')
+    textoPlano = f1.read()
+    f1.close()
+#######################################################
+    textoPlanob = textoPlano.encode()
+    m = hashlib.sha1(textoPlanob).hexdigest()
 
-    img = Image.open(archivoEntrada)
-    image = numpy.array(img)
-    image_size = img.size
-    
-    key = pad(bytes(entradaClave.get(), 'utf-8'), 16)
-    ivs = pad(bytes(entradaVector.get(), 'utf-8'), 16)
+    print(str(m))
 
-    cipher = None
-    #Para "CBC"
-    cipher = AES.new(key, AES.MODE_CBC, ivs)
-    #Para "ECB"
-    #cipher = AES.new(key, AES.MODE_ECB)
-
-    ct_bytes = cipher.encrypt(pad(image.tobytes(),AES.block_size,))
-
-    img_data = numpy.frombuffer(ct_bytes)
-
-    image_nva = Image.frombuffer("RGB",image_size,img_data)
-   
-    #Nombre del nuevo archivo
+    nmen = m + '|||' + textoPlano
+#######################################################
     metsplit = str(archivoEntrada).split('/')
     n = len(metsplit)
     nomarchi = metsplit[n-1]
-    print(nomarchi)
     nomarchi = nomarchi.split('.')
-    archivoSalida = str(nomarchi[0]) + "-h.bmp"
-
-    #Guradado de la imagen cifrada
-    image_nva.save(archivoSalida)
-
-    archivoSalida = "-"     #Limpieza de la variable archivo de salida
+    salida = str(nomarchi[0]) + "-hash.txt"
+    
+    f2 = open(salida, 'a')
+    f2.write(nmen)
+    f2.close() 
 
 
 def validarHash():     #Función de descifrado de mensajes
-    clave = entradaClave.get()
-    vector = entradaVector.get()
+    f1 = open(archivoEntrada, 'r')
+    textoPlano = f1.read()
+    f1.close()
+    funcDesc = StringVar()
 
-    img = Image.open(archivoEntrada)
-    image = numpy.array(img)
-    image_size = img.size
+    metsplit = textoPlano.split('|||')
+    if len(metsplit) == 2:
 
-    key = pad(bytes(clave, 'utf-8'), 16)
-    ivs = pad(bytes(vector, 'utf-8'), 16)
+        msghash = metsplit[0]
 
-    cipher = None
-    #Para "CBC"):
-    cipher = AES.new(key, AES.MODE_CBC, ivs)
-    #"ECB"
-    #cipher = AES.new(key, AES.MODE_ECB)
+        print(metsplit)
 
-    aux = image.tobytes()
-    pt = cipher.decrypt(aux)
+        newhash = hashlib.sha1(metsplit[1].encode()).hexdigest()
 
-    img_data = numpy.frombuffer(pt)
 
-    #Nombre del nuevo archivo
-    metsplit = str(archivoEntrada).split('/')
-    n = len(metsplit)
-    nomarchi = metsplit[n-1]
-    print(nomarchi)
-    nomarchi = nomarchi.split('.')
-    archivoSalida = str(nomarchi[0]) + "-v.bmp"
+        if msghash == newhash:
+            funcDesc.set('El mensaje se recibio integro. \n El Hash recibido y el calculado son iguales')
+            validarHash['bg'] = 'green'
+        else:
+            funcDesc.set('Alerta: \n El mensaje NO se recibio integro. \n El Hash recibido y el calculado NO son iguales')
+            validarHash['bg'] = 'red'
 
-    #Guardado de la imagen descifrada
-    Image.frombuffer("RGB",image_size,img_data).save(archivoSalida)
+    else:
+        funcDesc.set('Alerta: \n El archivo seleccionado NO se genero con esta aplicación. \n Verifique la ruta del archivo seleccionado.')
+        validarHash['bg'] = 'yellow'
+    validarHash.config(textvariable=funcDesc)
+    
 
-    archivoSalida = "-"     #Limpieza de la variable archivo de salida
 
 #Ventana principal de la interfaz grafica
 igu = tk.Tk()
@@ -120,6 +102,11 @@ botonGenerar.grid(pady=150, row=5, column=1)
 #Botón validarHash - 
 botonValidar = tk.Button(igu, text="Validar Hash", command=validarHash)
 botonValidar.grid(pady=150 ,row=5, column=2)
+
+#Función de Validación de Hash
+validarHash = tk.Label(igu, text=" Esperando validar hash ", width=60)
+validarHash.grid(pady=30 ,row=6, column=1)
+validarHash['bg'] = 'white'
 
 
 igu.mainloop()
