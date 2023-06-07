@@ -2,8 +2,9 @@ try:
     from six.moves import tkinter as tk
     from tkinter import *
     from tkinter import filedialog
-    from Cryptodome.PublicKey import RSA # Importamos el módulo RSA
-    from Cryptodome.Cipher import PKCS1_OAEP # Importamos el modulo de cifrado y descifrado
+    from Crypto.PublicKey import RSA
+    from Crypto.Cipher import PKCS1_OAEP
+    import binascii
 
 except ImportError:
     raise ImportError("Se requiere el modulo Tkinter y pycryptodome")
@@ -37,55 +38,46 @@ def importReadkey():       #Archivo de la llave
         botonRuta2['bg'] = 'blue' # Al presionar queda azul
         botonRuta2['fg'] = 'white' # Si pasamos el Mouse queda blanco
     else:
-        print("No se ha seleccionado ningún archivo.")
+        print("No se ha seleccionado ningna llave.")
 
 def cifrar():       #Función de cifrado de mensajes
     f1 = open(archivoMensaje, 'r')
-    textoPlano = f1.read()
+    textoPlano = bytes(f1.read(), encoding='utf8')
     f1.close()
 
     llave = RSA.import_key(open(archivokey).read())
     nuevoCifrado = PKCS1_OAEP.new(llave)
 
-    print(str(textoPlano))
-
-    nmen = nuevoCifrado.encrypt(textoPlano.encode()).decode()
+    nmen = nuevoCifrado.encrypt(textoPlano)
 
     metsplit = str(archivoMensaje).split('/')
     n = len(metsplit)
     nomarchi = metsplit[n-1]
-    print(nomarchi)
     nomarchi = nomarchi.split('.')
     salida = str(nomarchi[0]) + "-c.txt"
     
-    f2 = open(salida, 'w')
+    f2 = open(salida, 'wb')
     f2.write(nmen)
     f2.close()  
 
 def decifrar():     #Función de decifrado de mensajes
-    f1 = open(archivoMensaje, 'r')
+    f1 = open(archivoMensaje, 'rb')
     textoPlano = f1.read()
     f1.close()
     
     llave = RSA.importKey(open(archivokey).read())
     nuevoDescifrado = PKCS1_OAEP.new(llave)
 
-    textobytes = textoPlano.split('.')
-
-    for elemento in textobytes:
-        print(elemento)
-
-    nmen = nuevoDescifrado.decrypt(textoPlano.encode()).decode()
+    nmen = nuevoDescifrado.decrypt(textoPlano)
 
     metsplit = str(archivoMensaje).split('/')
     n = len(metsplit)
     nomarchi = metsplit[n-1]
-    print(nomarchi)
     nomarchi = nomarchi.split('.')
     salida = str(nomarchi[0]) + "-d.txt"
     
     f2 = open(salida, 'w')
-    f2.write(nmen)
+    f2.write(nmen.decode("utf-8"))
     f2.close()
     
 

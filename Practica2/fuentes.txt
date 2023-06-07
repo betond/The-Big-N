@@ -1,6 +1,0 @@
-https://pythondiario.com/2020/07/criptografia-en-python-rsa.html?amp=1
-
-
-https://pythondiario.com/2020/07/criptografia-en-python-rsa.html
-
-https://pycryptodome.readthedocs.io/en/latest/src/cipher/oaep.html

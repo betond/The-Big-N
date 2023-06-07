@@ -7,7 +7,7 @@ except ImportError:
 
 #Escritura de claves en archivo
 def archivoWritetxt(clavetxt, tipo):
-    salida = tipo + ".key"
+    salida = tipo + ".pem"
     f1 = open(salida, 'a')
     f1.write(clavetxt)
     f1.close() 
