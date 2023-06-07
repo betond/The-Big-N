@@ -9,9 +9,8 @@ except ImportError:
 #-------------------------------------------------------------------------------------------------------------------------------#
 archivoEntrada = ""
 
-
 def archivoReadBMP():       #Archivo de lectura 
-    global archivoEntrada 
+    global archivoEntrada
     archivoEntrada = filedialog.askopenfilename()
     if archivoEntrada:
     # Leer el contenido (en bytes) del archivo.
@@ -24,6 +23,8 @@ def archivoReadBMP():       #Archivo de lectura
     else:
         print("No se ha seleccionado ningún archivo.")
 
+    estadovent.config(textvariable=estado)
+
 
 def generarHash():       #Función de generación de hash
     f1 = open(archivoEntrada, 'r')
@@ -35,6 +36,10 @@ def generarHash():       #Función de generación de hash
 
     print(str(m))
 
+    estado = StringVar()
+    estado.set(":)")
+    estadovent['bg'] = 'yellow'
+
     nmen = m + '|||' + textoPlano
 #######################################################
     metsplit = str(archivoEntrada).split('/')
@@ -42,6 +47,8 @@ def generarHash():       #Función de generación de hash
     nomarchi = metsplit[n-1]
     nomarchi = nomarchi.split('.')
     salida = str(nomarchi[0]) + "-hash.txt"
+
+    estadovent.config(textvariable=estado)
     
     f2 = open(salida, 'a')
     f2.write(nmen)
@@ -53,29 +60,34 @@ def validarHash():     #Función de descifrado de mensajes
     textoPlano = f1.read()
     f1.close()
     funcDesc = StringVar()
+    estado = StringVar()
 
     metsplit = textoPlano.split('|||')
     if len(metsplit) == 2:
 
         msghash = metsplit[0]
-
-        print(metsplit)
-
         newhash = hashlib.sha1(metsplit[1].encode()).hexdigest()
 
+        print(msghash + '---' + newhash)
 
         if msghash == newhash:
-            funcDesc.set('El mensaje se recibio integro. \n El Hash recibido y el calculado son iguales')
+            funcDesc.set('El mensaje se recibio integro. \n El Hash recibido y el calculado son iguales. \n :)')
             validarHash['bg'] = 'green'
+            estado.set("C:")
+            estadovent['bg'] = 'green'
         else:
-            funcDesc.set('Alerta: \n El mensaje NO se recibio integro. \n El Hash recibido y el calculado NO son iguales')
+            funcDesc.set('Alerta: \n El mensaje NO se recibio integro. \n El Hash recibido y el calculado NO son iguales. \n :(')
             validarHash['bg'] = 'red'
+            estado.set(":C")
+            estadovent['bg'] = 'red'
 
     else:
-        funcDesc.set('Alerta: \n El archivo seleccionado NO se genero con esta aplicación. \n Verifique la ruta del archivo seleccionado.')
+        funcDesc.set('Alerta: \n El archivo seleccionado NO se genero con esta aplicación. \n Verifique la ruta del archivo seleccionado. \n :c')
         validarHash['bg'] = 'yellow'
+        estado.set(":°")
+        estadovent['bg'] = 'yellow'
     validarHash.config(textvariable=funcDesc)
-    
+    estadovent.config(textvariable=estado)
 
 
 #Ventana principal de la interfaz grafica
@@ -108,5 +120,8 @@ validarHash = tk.Label(igu, text=" Esperando validar hash ", width=60)
 validarHash.grid(pady=30 ,row=6, column=1)
 validarHash['bg'] = 'white'
 
+#Imagenes
+estadovent = tk.Label(igu, text=":|",font=("Arial", 50))
+estadovent.grid(row=5 ,column= 0)
 
 igu.mainloop()
