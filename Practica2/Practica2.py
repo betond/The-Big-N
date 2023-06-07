@@ -2,8 +2,13 @@ try:
     from six.moves import tkinter as tk
     from tkinter import *
     from tkinter import filedialog
-    from Crypto.PublicKey import RSA
-    from Crypto.Cipher import PKCS1_OAEP
+    #Para linux
+    from Cryptodome.PublicKey import RSA
+    from Cryptodome.Cipher import PKCS1_OAEP
+    #Para Windows
+    #from Cryptodome.PublicKey import RSA
+    #from Cryptodome.Cipher import PKCS1_OAEP
+    
     import binascii
 
 except ImportError:
