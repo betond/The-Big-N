@@ -5,7 +5,7 @@ try:
     import hashlib, base64
 
 except ImportError:
-    raise ImportError("Se requieren los modulos Tkinter, PIL, PyCryptodome, numpy")
+    raise ImportError("Se requieren los modulos Tkinter y hashlib")
 #-------------------------------------------------------------------------------------------------------------------------------#
 archivoEntrada = ""
 
