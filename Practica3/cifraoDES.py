@@ -149,7 +149,7 @@ etiquetaClave = tk.Label(text="Introduzca la clave 'key': ")
 etiquetaClave.grid(pady=20 ,padx=20 ,row=3, column=0)
 
 #Entrada de la Cleave-Key
-entradaClave = tk.Entry(justify=CENTER, show='*')
+entradaClave = tk.Entry(justify=CENTER)
 entradaClave.grid(pady=15, row=4, column=0)
 
 #Mensaje al usuario Vector
@@ -157,11 +157,11 @@ etiquetaVector = tk.Label(text="Introduzca el vector de inicio: ")
 etiquetaVector.grid(pady=20 ,padx=20 ,row=3, column=1)
 
 #Entrada del Vector
-entradaVector = tk.Entry(justify=CENTER, show='*')
+entradaVector = tk.Entry(justify=CENTER)
 entradaVector.grid(pady=15, row=4, column=1)
 
 #Menú desplegable
-combo = ttk.Combobox(state="readonly", values=["ECB","CBC","CFB","OFB","CTR"])
+combo = ttk.Combobox(state="readonly", values=["ECB","CBC","CFB","OFB"])
 combo.grid(row=4, column=2)
 
 #Botón cifrar - 
