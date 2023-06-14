@@ -6,8 +6,8 @@ try:
     from Cryptodome.PublicKey import RSA
     from Cryptodome.Cipher import PKCS1_OAEP
     #Para Windows
-    #from Cryptodome.PublicKey import RSA
-    #from Cryptodome.Cipher import PKCS1_OAEP
+    #from Crypto.PublicKey import RSA
+    #from Crypto.Cipher import PKCS1_OAEP
     
     import binascii
 
