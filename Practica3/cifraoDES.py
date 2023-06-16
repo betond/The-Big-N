@@ -36,6 +36,7 @@ def cifrar():       #Función de cifrado de mensajes
     image_size = img.size
     
     key = pad(bytes(entradaClave.get(), 'utf-8'), 8)
+
     ivs = pad(bytes(entradaVector.get(), 'utf-8'), 8)
 
     modoDoperacipon = combo.get()
@@ -86,13 +87,10 @@ def descifrar():     #Función de descifrado de mensajes
     image_size = img.size
 
     # clave propuesta equipo10
-
     key = pad(bytes(clave, 'utf-8'), 8)
     ivs = pad(bytes(vector, 'utf-8'), 8)
 
-    cipher = None
     modoDoperacipon = combo.get()
-
     cipher = None
 
     if modoDoperacipon == "ECB":    #Para modo "EBC"
