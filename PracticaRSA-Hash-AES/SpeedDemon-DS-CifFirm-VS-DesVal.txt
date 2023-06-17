@@ -1,0 +1,70 @@
+			El mensaje ha sido descifrado y verificdo correctamente, gracias por confiar en nosotros.
+
+
+Clave del cifrado:  qwerty
+Vector de inicializacion del cifrado:  hola amigo
+
+El mensaje recibido es: 
+Si acepto Betito
+ 
+I'm headed for the border
+It's on my mind
+And nothin' really matters
+I've got to be on time
+Look in the view mirror
+Is he hot on my tracks
+Is he getting nearer
+I feel some heat, is on my back
+Speedin' on the freeway, gotta get a lead way
+(Speed demon)
+Doin' it on the highway, gotta have it my way
+(Speed demon)
+Mind is like a compass, I'm stoppin' at nothin'
+(Speed demon)
+Yeah, pull over, boy, and get your ticket right
+And nothin' gonna stop me
+Ain't no stop and go
+I'm speedin' on the midway
+I gotta really burn this road
+Speedin' on the freeway, gotta get a lead way
+(Speed demon)
+Doin' it on the highway, gotta have it my way
+(Speed demon)
+Mind is like a compass, I'm stoppin' at nothin'
+(Speed demon)
+Yes, pull over, boy, and get your ticket right
+Speed demon, you're the very same one
+Who said the future's in your hands
+The life you save could be your own
+You're preachin' 'bout my life like you're the law
+Gonna live each day and hour like
+For me there's no tomorrow
+Go, go, go, auh
+Speedin' on the freeway, gotta get a lead way
+(Speed demon)
+Got fire in my pocket, I just lit a rocket
+(Speed demon)
+I just, pull over, boy, and get your ticket right
+(Speed demon)
+Pull over, boy, and get your ticket right
+(Speed demon)
+I just, pull over, boy, and eat your ticket
+Pull over, boy
+Pull over, boy, and get your ticket right
+Get your ticket right
+Pull over, boy
+Get your ticket right
+Pull over, boy
+And get your ticket right
+Pull over, boy
+Pull over, boy, and get your ticket
+Eat your ticket
+Get your ticket
+Eat yo', get yo'
+Get your ticket right
+
+Atte. Alicia 
+
+
+Firma del remitente: b"\xa8R\xe1\xa1g\xd6\xafu\x89\x91\x03Q>\xc5D\xa8\xdea\xcfP/\x83\x81\x19t\xdeE\xa9\xb9\xc2\xa5\xace\xce/\x01\x82zYQ>,\x98\xa1\x02r\xabd+\x1di\x0c|\x98\xd0x\x97\x90\x0fi\xa9\xe8\xa8\xd0i\x8cXLH\xbc\xbf%\xd9\n3\x83\r\xf9\x80\xdd\x87\xb0\x8d\xab\xc2\xac)\x02\xd1\x8a\xe5J\xc3\xcb\xb8\xe05\xc8\x9d\xeb\xe9\xa1{\x00'M;\x18U\xdb \xb7\xe20Q4\x03\xc7\xc4\xba\x1f\xdfc\xf6\x1e\xad\x9bz\x15\xf71u\xbd\xd5\xd5\x8dc\xc8D\x1a\x93\xc7\xff)\xf6!\xd7\x0c\xd0\xbbm+\xbd0\xbc~\x81\x007\xea\xa4\xccP\xa8\x18\xc4\x91 \x0c\x95\x86#\x9e\xa8\xa4\xc3\xb4\x0b\x01\xc4\xb8(\xdeD\xad\xb8\xea\x99\x17\xe42w\x90\xf2% $\xee\xf7\xafX\xe9QQ\x84\xf5\x13rEo\xe8M\x15Jj\xe4\xfc\xc5\xb3\x8cZ\xdbw\xb9\x84T\x8a\x93`{E|\xbf\xf9\xce\xc6\tQ\x03IiU\xd1j\x12\xd5dX\xa2\xcf\xd1\xf9\xea\x1e7\x90"
+Cadena de verificación:  uA9SETuRxqzKpKpGGiVtt/UnQhZyKF4k28XOK5cN1vU=
