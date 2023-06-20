@@ -1,37 +1,35 @@
 from Cryptodome.Cipher import AES
-from Cryptodome.Util.Padding import *
+from Cryptodome.Util.Padding import * 
 from Cryptodome.PublicKey import RSA
 from Cryptodome.Cipher import PKCS1_OAEP
-import hashlib, base64
+import base64
+from cryptography.hazmat.primitives import hashes as hashff
+from cryptography.hazmat.primitives.asymmetric import padding as paddf
+from cryptography.hazmat.primitives.serialization import load_pem_public_key, load_pem_private_key
 
 
-def generarHash(textoPlano):
-    h = hashlib.new('sha256')
-    h.update(textoPlano)
-    digesto = base64.b64encode(h.digest())
-    digest = digesto.decode("UTF-8")
-    return digest
-
-#   Cifra el Hash con la llave privada del remitente
-def firmar(hash, llavePriv):
-    llave = RSA.import_key(open(llavePriv).read())
-    nuevoCifrado = PKCS1_OAEP.new(llave)
-    tp = bytes(hash,encoding='utf-8')
+#   Generar la firma con la llave privada del remitente
+def firmar_archivo(archivo, clave_privada):
+    with open(archivo, 'rb') as file:
+        contenido = file.read()
     
-    firma = nuevoCifrado.encrypt(tp)
+    realizar_firma = load_pem_private_key(open(clave_privada,'rb').read(), password=None)
+    firma = realizar_firma.sign(contenido,paddf.PSS(mgf=paddf.MGF1(hashff.SHA256()),salt_length=paddf.PSS.MAX_LENGTH),hashff.SHA256())
     
     return firma
 
-#   Descifra el Hash con la llave publica del remitente
-def validar(hash, llavePub):
-    llave = RSA.import_key(open(llavePub).read())
-    nuevoCifrado = PKCS1_OAEP.new(llave)
-
-    firma = nuevoCifrado.decrypt(hash)
-
-    firmaDes = firma.decode("UTF-8")
-
-    return firmaDes
+#   Verificar el Hash con la llave publica del remitente
+def verificar_firma(textoclaro, firma, clave_publica):
+    print(str(textoclaro))
+    pub = open(clave_publica,'rb').read()
+    revisar_firma = load_pem_public_key(pub)
+    
+    try:
+        print(f'Firma digital generada: {firma.hex()}')
+        revisar_firma.verify(firma, textoclaro,paddf.PSS(mgf=paddf.MGF1(hashff.SHA256()),salt_length=paddf.PSS.MAX_LENGTH),hashff.SHA256())
+        return True
+    except Exception:
+        return False
 
 #   Cifrar mensaje AES y pasar en bytes
 def cifrar(clave, vector, textoplano):
@@ -52,9 +50,9 @@ def descifrar(clave, vector, textocifrado):
 
     cipher = AES.new(key,AES.MODE_CFB, ivs)
 
-    nmen = cipher.decrypt(textocifrado).decode('utf-8')
+    nmen = cipher.decrypt(textocifrado)
 
-    textoClaro = str(nmen)
+    textoClaro = nmen
 
     return textoClaro
 

@@ -56,8 +56,6 @@ def CifrarFirmar():       #Función de generación de hash
     nmen = []
     #Leemos el mensaje
     textoPlano = LeerArchivo(archivoEntrada)
-    #Generamos Hash
-    hash = generarHash(textoPlano)
     #Obtenemos la Clave y el Vector
     clave = entradaClave.get()
     vector = entradaVector.get()
@@ -68,7 +66,7 @@ def CifrarFirmar():       #Función de generación de hash
     #Ciframos el mensaje ( AES - CFB)
     nmen.append(cifrar(clave,vector,textoPlano))
     #Ciframos el Hash (RSA - Privada del Remitente)
-    nmen.append(firmar(hash, llavePriv))
+    nmen.append(firmar_archivo(archivoEntrada, llavePriv))
 
     estado = StringVar()
     estado.set(":)")
@@ -103,15 +101,10 @@ def DescifrarValidar():     #Función de descifrado de mensajes
 
         clave, vector = desConfidencial(metsplit[0], metsplit[1], llavePriv) #Desciframos la clave y el vector con nuestra llave privada
         textoclaro = descifrar(clave, vector, metsplit[2]) #Desciframos el mensaje con AES
-        #Calculamos el hash del mensaje descifrado
-        h = hashlib.new('sha256')
-        h.update(bytes(textoclaro,"UTF-8"))
-        digesto = base64.b64encode(h.digest())
-        digest = digesto.decode("UTF-8")
         #Desciframos la firma con la llave publica del remitente
-        firma = validar(metsplit[3], llavePub)
+        firma = verificar_firma(textoclaro, metsplit[3], llavePub)
 
-        if firma == digest:
+        if firma:
             funcDesc.set('El mensaje se recibio integro. \n El Hash recibido y el calculado son iguales. \n :)')
             DescifrarValidar['bg'] = 'green'
             estado.set("C:")
@@ -123,7 +116,7 @@ def DescifrarValidar():     #Función de descifrado de mensajes
             nomarchi = nomarchi.split('.')
             salida = str(nomarchi[0]) + "-VS-DesVal.txt"
 
-            nmen = "\t\t\tEl mensaje ha sido descifrado y verificdo correctamente, gracias por confiar en nosotros.\n\n" + "\nClave del cifrado:  " + str(clave,"UTF-8") + "\nVector de inicializacion del cifrado:  " + str(vector,"UTF-8") + "\n\nEl mensaje recibido es: \n" + textoclaro + "\n\n\nFirma del remitente: " + str(metsplit[3]) + "\nCadena de verificación:  " + str(firma)
+            nmen = "\t\t\tEl mensaje ha sido descifrado y verificado correctamente, gracias por confiar en nosotros.\n\n" + "\nClave del cifrado:  " + str(clave,"UTF-8") + "\nVector de inicializacion del cifrado:  " + str(vector,"UTF-8") + "\n\nEl mensaje recibido es: \n" + str(textoclaro,'UTF-8') + "\n\n\n\nFirma del remitente: " + str(metsplit[3].hex())
 
             print(nmen)
 
