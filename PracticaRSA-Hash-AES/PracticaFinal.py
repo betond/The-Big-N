@@ -142,7 +142,7 @@ def DescifrarValidar():     #Función de descifrado de mensajes
 #Ventana principal de la interfaz grafica
 igu = tk.Tk()
 igu.geometry("1400x800")
-igu.title("Práctica No.5 - Función Hash")
+igu.title("Práctica - Criptografía híbrida")
 
 #Mensaje al usuario             -----------------           Ruta al archivo de texto del Mensaje
 etiquetaCifrar = tk.Label(text="Especifique la ruta del archivo de texto '.txt':")
