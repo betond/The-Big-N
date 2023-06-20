@@ -77,7 +77,7 @@ def CifrarFirmar():       #Función de generación de hash
     n = len(metsplit)
     nomarchi = metsplit[n-1]
     nomarchi = nomarchi.split('.')
-    salida = str(nomarchi[0]) + "-DS-CifFirm.txt"
+    salida = str(nomarchi[0]) + "-Firmado.txt"
 
     for i in range(4) :
         with open(salida, 'ab') as f:
@@ -114,7 +114,7 @@ def DescifrarValidar():     #Función de descifrado de mensajes
             n = len(metsplitnom)
             nomarchi = metsplitnom[n-1]
             nomarchi = nomarchi.split('.')
-            salida = str(nomarchi[0]) + "-VS-DesVal.txt"
+            salida = str(nomarchi[0]) + "-Verificado.txt"
 
             nmen = "\t\t\tEl mensaje ha sido descifrado y verificado correctamente, gracias por confiar en nosotros.\n\n" + "\nClave del cifrado:  " + str(clave,"UTF-8") + "\nVector de inicializacion del cifrado:  " + str(vector,"UTF-8") + "\n\nEl mensaje recibido es: \n" + str(textoclaro,'UTF-8') + "\n\n\n\nFirma del remitente: " + str(metsplit[3].hex())
 
@@ -141,7 +141,7 @@ def DescifrarValidar():     #Función de descifrado de mensajes
 
 #Ventana principal de la interfaz grafica
 igu = tk.Tk()
-igu.geometry("2200x800")
+igu.geometry("1400x800")
 igu.title("Práctica No.5 - Función Hash")
 
 #Mensaje al usuario             -----------------           Ruta al archivo de texto del Mensaje
