@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import *
 from tkinter import filedialog
 from Servicios import *
-import hashlib
 #-------------------------------------------------------------------------------------------------------------------------------#
 archivoEntrada = ""
 llavePriv = ""
